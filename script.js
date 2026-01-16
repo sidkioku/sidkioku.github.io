@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('apology-btn');
-    
+
     btn.addEventListener('click', () => {
         // Trigger confetti
         confetti({
@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Change button text and style
-        btn.textContent = "Juhu! Danke! ❤️";
+        btn.textContent = "Yaşasın! Teşekkürler! ❤️";
         btn.style.background = "#059669";
         btn.disabled = true;
         btn.style.cursor = "default";
         btn.style.transform = "none";
-        
+
         // Optional: Launch a second burst after a delay
         setTimeout(() => {
             confetti({
