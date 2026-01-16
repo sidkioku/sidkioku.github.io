@@ -1,131 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #89CFF0; /* Baby blue color */
-            overflow: hidden; /* Verhindert unnötiges Scrollen */
-        }
-        .content {
-            text-align: center;
-            width: 100%;
-            padding: 20px; /* Sicherstellen, dass es etwas Abstand vom Rand gibt */
-        }
-        .buttons {
-            display: inline-flex;
-            flex-direction: column; /* Buttons untereinander auf mobilen Geräten */
-            gap: 10px;
-            margin-top: 20px;
-        }
-        #moveButton {
-            position: relative;
-        }
-        #catContainer {
-            margin-top: 20px;
-            display: none; /* Initially hidden */
-        }
-        #catContainer img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-        .buttons button {
-            background-color: darkred;
-            color: white;
-            border: none;
-            padding: 15px 30px; /* Größere Buttons für mobile Geräte */
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px; /* Größere Schrift für mobile Geräte */
-        }
-        .buttons button:hover {
-            opacity: 0.8;
-        }
-        .hidden {
-            display: none;
-        }
-        .buttons.hidden {
-            visibility: hidden;
-        }
-    </style>
-    <script>
-        function moveButton() {
-            const button = document.getElementById('moveButton');
-            const evetButton = document.querySelector('button[onclick]');
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-            const buttonWidth = button.offsetWidth;
-            const buttonHeight = button.offsetHeight;
-
-            let randomX, randomY;
-            let overlap;
-
-            do {
-                randomX = Math.floor(Math.random() * (viewportWidth - buttonWidth));
-                randomY = Math.floor(Math.random() * (viewportHeight - buttonHeight));
-
-                const evetRect = evetButton.getBoundingClientRect();
-                const hayirRect = {
-                    left: randomX,
-                    top: randomY,
-                    right: randomX + buttonWidth,
-                    bottom: randomY + buttonHeight
-                };
-
-                overlap = !(hayirRect.right < evetRect.left ||
-                            hayirRect.left > evetRect.right ||
-                            hayirRect.bottom < evetRect.top ||
-                            hayirRect.top > evetRect.bottom);
-            } while (overlap);
-
-            button.style.position = 'absolute'; /* Change to absolute when moving */
-            button.style.left = `${randomX}px`;
-            button.style.top = `${randomY}px`;
-        }
-
-        document.getElementById('moveButton').addEventListener('touchstart', moveButton);
-
-        async function showCat() {
-            const catContainer = document.getElementById('catContainer');
-            const catImage = document.getElementById('catImage');
-            const catText = document.getElementById('catText');
-            const buttons = document.querySelector('.buttons');
-
-            try {
-            const response = await fetch('https://api.thecatapi.com/v1/images/search');
-            const data = await response.json();
-            const catUrl = data[0].url;
-
-            catImage.src = catUrl;
-            catText.textContent = "Seni çok çok çok çok çok seviyorum iyi ki varsın";
-            catContainer.style.display = 'block';
-            buttons.style.display = 'none'; // Hide the buttons
-            } catch (error) {
-            console.error('Error fetching cat image:', error);
-            }
-        }
-    </script>
+    <title>Entschuldigung!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="content">
-        <h1>Seni çok sevdiğimi biliyo muydun?</h1>
-        <div class="buttons">
-            <button onclick="showCat()">Evet</button>
-            <button id="moveButton" onmouseover="moveButton()">Hayir</button>
+    <div class="background-animation"></div>
+    <main class="container">
+        <div class="glass-card">
+            <div class="status-badge">
+                <span class="pulse"></span>
+                Ticket Gelöst
+            </div>
+            
+            <h1>Mission Erfüllt! 🚀</h1>
+            
+            <p class="message">
+                Es tut mir leid, dass es so lange gedauert hat. <br>
+                Ich habe endlich erledigt, was du wolltest.
+            </p>
+            
+            <div class="sub-message">
+                (Bitte nicht mehr schimpfen 🥺)
+            </div>
+
+            <button id="apology-btn" class="primary-btn">
+                Entschuldigung angenommen?
+            </button>
         </div>
-        <div id="catContainer">
-            <img id="catImage" alt="Adorable Cat">
-            <p id="catText"></p>
-        </div>
-    </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
